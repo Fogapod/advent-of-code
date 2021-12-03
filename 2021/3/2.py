@@ -10,19 +10,18 @@ gamma = 0b0
 epsilon = 0b0
 
 for i in range(bit_count):
-    count_0 = 0
-    count_1 = 0
+    ratio = 0
 
     for line in data:
         if line >> i & 1 == 1:
-            count_1 += 1
+            ratio += 1
         else:
-            count_0 += 1
+            ratio -= 1
 
-    if count_0 > count_1:
-        bit = 0
-    elif count_1 > count_0:
+    if ratio > 0:
         bit = 1
+    elif ratio < 0:
+        bit = 0
     else:
         print(f"whoops, equal number of bits on row {i}")
         break
@@ -39,16 +38,15 @@ oxy_candidates = data.copy()
 co2_candidates = data.copy()
 
 def most_common_bit(arr, position: int) -> int:
-    count_0 = 0
-    count_1 = 0
+    ratio = 0
 
     for val in arr:
         if val >> position & 1 == 1:
-            count_1 += 1
+            ratio += 1
         else:
-            count_0 += 1
+            ratio -= 1
 
-    return int(count_1 >= count_0)
+    return int(ratio >= 0)
 
 for i in reversed(range(bit_count)):
     if len(oxy_candidates) > 1:
