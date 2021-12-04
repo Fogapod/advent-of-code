@@ -53,6 +53,7 @@ def sum_unmarked(board) -> int:
 
     return total
 
+
 def winning_board():
     for number in numbers:
         for board in boards:
@@ -79,5 +80,6 @@ def last_winning_board():
                 did_not_win.append(board)
 
         remaining_boards = did_not_win
+
 
 last_winning_board()
