@@ -15,19 +15,22 @@ for board in board_lines:
 
     boards.append(rows)
 
-board_side = len(boards[0])
-
 # task 1
 def board_wins(board) -> bool:
+    board_side = len(board)
+
     for i in range(board_side):
-        rows_marked = 0
-        cols_marked = 0
+        if not board[i][i][1]:
+            continue
+
+        score_x = 0
+        score_y = 0
 
         for j in range(board_side):
-            rows_marked += int(board[i][j][1])
-            cols_marked += int(board[j][i][1])
+            score_x += int(board[i][j][1])
+            score_y += int(board[j][i][1])
 
-        if board_side in (rows_marked, cols_marked):
+        if board_side in (score_x, score_y):
             return True
 
     return False
