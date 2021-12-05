@@ -24,11 +24,7 @@ fn mark_number(board: &mut [i64; BOARD_SIDE * BOARD_SIDE], number: i64) -> bool 
                 score_y += board[k * BOARD_SIDE + j];
             }
 
-            if score_x == -(BOARD_SIDE as i64) || score_y == -(BOARD_SIDE as i64) {
-                return true;
-            }
-
-            return false;
+            return -score_x == BOARD_SIDE as i64 || -score_y == BOARD_SIDE as i64;
         }
     }
 
