@@ -28,7 +28,7 @@ fn mark_number(board: &mut [i64; BOARD_SIDE * BOARD_SIDE], number: i64) -> bool 
                 return true;
             }
 
-            break;
+            return false;
         }
     }
 
@@ -65,7 +65,7 @@ pub fn run1(input: &str) -> i64 {
 
 // this fails on some inputs, i dont know why
 #[allow(clippy::mut_range_bound)]
-pub fn run(input: &str) -> i64 {
+pub fn run2(input: &str) -> i64 {
     let (numbers, rest) = input.split_once("\n\n").unwrap();
 
     let mut boards = [[0i64; BOARD_SIDE * BOARD_SIDE]; BOARD_COUNT];
@@ -111,5 +111,5 @@ fn main() {
     let input = &fs::read_to_string("input").unwrap();
 
     println!("{}", run1(input));
-    println!("{}", run(input));
+    println!("{}", run2(input));
 }
