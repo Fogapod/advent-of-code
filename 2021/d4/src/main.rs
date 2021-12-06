@@ -6,7 +6,7 @@ const BOARD_COUNT: usize = 100;
 // 10 numbers (0 - 9) + 90 numbers (10 - 99) + 99 ','
 const RAW_NUMBERS_LENGTH: usize = 10 + 90 * 2 + 99;
 
-const RAW_BOARD_ROW_LENGTH: usize = BOARD_SIDE * 2 + BOARD_SIDE - 1 + 1;
+const RAW_BOARD_ROW_LENGTH: usize = BOARD_SIDE * 2 + BOARD_SIDE;
 const RAW_BOARD_LENGTH: usize = RAW_BOARD_ROW_LENGTH * BOARD_SIDE;
 
 fn sum_unmarked(board: &[i64; BOARD_SIDE * BOARD_SIDE]) -> i64 {
