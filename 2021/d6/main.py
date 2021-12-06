@@ -7,6 +7,7 @@ DAYS_2 = 256
 with open("input") as f:
     top_level_fish = [int(f) for f in f.read().split(",")]
 
+
 @functools.cache
 def solve(days_until_duplication: int, days: int) -> int:
     days -= days_until_duplication
@@ -15,6 +16,7 @@ def solve(days_until_duplication: int, days: int) -> int:
         return solve(7, days) + solve(9, days)
 
     return 1
+
 
 print(sum([solve(f, DAYS_1) for f in top_level_fish]))
 print(sum([solve(f, DAYS_2) for f in top_level_fish]))
@@ -36,4 +38,16 @@ const SOLUTION_MAP_2: [i64; 10] = [
         """
     )
 
+
+# this does not work
+def gen_ugly_code():
+    print(
+        " +\n".join(
+            f"SOLUTION_MAP_2.get_unchecked((input.get_unchecked({i}) - b'0') as usize)"
+            for i in range(0, 600, 2)
+        )
+    )
+
+
 # gen_solution_maps()
+# gen_ugly_code()
