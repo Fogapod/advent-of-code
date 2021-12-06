@@ -18,3 +18,22 @@ def solve(days_until_duplication: int, days: int) -> int:
 
 print(sum([solve(f, DAYS_1) for f in top_level_fish]))
 print(sum([solve(f, DAYS_2) for f in top_level_fish]))
+
+# for rust solution
+def gen_solution_maps():
+    print(
+        f"""
+const SOLUTION_MAP_1: [i64; 10] = [
+    {", ".join(str(solve(i, 80)) for i in range(10))}
+];
+        """
+    )
+    print(
+        f"""
+const SOLUTION_MAP_2: [i64; 10] = [
+    {", ".join(str(solve(i, 256)) for i in range(10))}
+];
+        """
+    )
+
+# gen_solution_maps()
