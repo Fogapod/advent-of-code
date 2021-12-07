@@ -3,6 +3,18 @@
 version = 3
 
 [[package]]
+name = "aoc-rust"
+version = "0.1.0"
+dependencies = [
+ "criterion",
+ "d02",
+ "d04",
+ "d05",
+ "d06",
+ "d07",
+]
+
+[[package]]
 name = "arrayvec"
 version = "0.7.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -181,6 +193,10 @@ checksum = "2b2466559f260f48ad25fe6317b3c8dac77b5bdb5763ac7d9d6103530663bc90"
 dependencies = [
  "memchr",
 ]
+
+[[package]]
+name = "d02"
+version = "0.1.0"
 
 [[package]]
 name = "d04"
@@ -401,17 +417,6 @@ name = "regex-syntax"
 version = "0.6.25"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f497285884f3fcff424ffc933e56d7cbca511def0c9831a7f9b5f6153e3cc89b"
-
-[[package]]
-name = "root"
-version = "0.1.0"
-dependencies = [
- "criterion",
- "d04",
- "d05",
- "d06",
- "d07",
-]
 
 [[package]]
 name = "rustc_version"

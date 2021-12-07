@@ -93,6 +93,7 @@ pub fn run1(input: &[u8]) -> i64 {
         .sum()
 }
 
+#[inline]
 fn triangular_number(n: i64) -> i64 {
     n * (n + 1) / 2
 }

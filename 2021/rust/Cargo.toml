@@ -1,13 +1,14 @@
 [package]
-name = "root"
+name = "aoc-rust"
 version = "0.1.0"
 edition = "2021"
 
 [workspace]
-members = ["d04", "d05", "d06", "d07"]
+members = ["d02", "d04", "d05", "d06", "d07"]
 
 
 [dependencies]
+d02 = { path = "d02" }
 d04 = { path = "d04" }
 d05 = { path = "d05" }
 d06 = { path = "d06" }
@@ -15,6 +16,14 @@ d07 = { path = "d07" }
 
 [dev-dependencies]
 criterion = "0.3"
+
+[[bin]]
+name = "d02"
+path = "d02/src/main.rs"
+
+[[bench]]
+name = "d02"
+harness = false
 
 [[bin]]
 name = "d04"
