@@ -1,0 +1,45 @@
+[package]
+name = "root"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+d04 = { path = "d04" }
+d05 = { path = "d05" }
+d06 = { path = "d06" }
+d07 = { path = "d07" }
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bin]]
+name = "d04"
+path = "d04/src/main.rs"
+
+[[bench]]
+name = "d04"
+harness = false
+
+[[bin]]
+name = "d05"
+path = "d05/src/main.rs"
+
+[[bench]]
+name = "d05"
+harness = false
+
+[[bin]]
+name = "d06"
+path = "d06/src/main.rs"
+
+[[bench]]
+name = "d06"
+harness = false
+
+[[bin]]
+name = "d07"
+path = "d07/src/main.rs"
+
+[[bench]]
+name = "d07"
+harness = false
