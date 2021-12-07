@@ -16,13 +16,12 @@ pub fn run1_brute(input: &[u8]) -> i64 {
                 .iter()
                 .rev()
                 .enumerate()
-                .map(|(mut i, byte)| {
+                .map(|(i, byte)| {
                     let mut byte = (byte - b'0') as i64;
 
-                    while i > 0 {
-                        i -= 1;
-                        byte *= 10
-                    }
+                    (0..i).for_each(|_| {
+                        byte *= 10;
+                    });
 
                     byte
                 })
@@ -65,13 +64,12 @@ pub fn run1(input: &[u8]) -> i64 {
                 .iter()
                 .rev()
                 .enumerate()
-                .map(|(mut i, byte)| {
+                .map(|(i, byte)| {
                     let mut byte = (byte - b'0') as i64;
 
-                    while i > 0 {
-                        i -= 1;
-                        byte *= 10
-                    }
+                    (0..i).for_each(|_| {
+                        byte *= 10;
+                    });
 
                     byte
                 })
@@ -93,7 +91,7 @@ pub fn run1(input: &[u8]) -> i64 {
         .sum()
 }
 
-#[inline]
+#[inline(always)]
 fn triangular_number(n: i64) -> i64 {
     n * (n + 1) / 2
 }
@@ -111,13 +109,12 @@ pub fn run2(input: &[u8]) -> i64 {
                 .iter()
                 .rev()
                 .enumerate()
-                .map(|(mut i, byte)| {
+                .map(|(i, byte)| {
                     let mut byte = (byte - b'0') as i64;
 
-                    while i > 0 {
-                        i -= 1;
-                        byte *= 10
-                    }
+                    (0..i).for_each(|_| {
+                        byte *= 10;
+                    });
 
                     byte
                 })
