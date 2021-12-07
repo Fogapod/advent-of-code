@@ -1,5 +1,3 @@
-use d06;
-
 use criterion::*;
 
 fn bench(c: &mut Criterion) {

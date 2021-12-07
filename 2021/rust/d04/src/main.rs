@@ -1,5 +1,3 @@
-use d04;
-
 fn main() {
     let input = &std::fs::read(format!("../input/{}/full", module_path!())).unwrap();
 
