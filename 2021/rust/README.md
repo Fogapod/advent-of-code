@@ -18,12 +18,14 @@ cargo run --bin d02
 
 ### Benchmarking solution
 
+Benchmark certain day:
+
 ```sh
-cargo bench d02
+cargo bench --bench d02
 ```
 
-Or benchmark individual part of sulution:
+Or benchmark individual part of day:
 
 ```sh
-cargo bench d02-1
+cargo bench --bench d02 d02-1
 ```

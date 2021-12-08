@@ -106,138 +106,138 @@ path = "d08/src/main.rs"
 name = "d08"
 harness = false
 
-# [[bin]]
-# name = "d09"
-# path = "d09/src/main.rs"
+[[bin]]
+name = "d09"
+path = "d09/src/main.rs"
 
-# [[bench]]
-# name = "d09"
-# harness = false
+[[bench]]
+name = "d09"
+harness = false
 
-# [[bin]]
-# name = "d10"
-# path = "d10/src/main.rs"
+[[bin]]
+name = "d10"
+path = "d10/src/main.rs"
 
-# [[bench]]
-# name = "d10"
-# harness = false
+[[bench]]
+name = "d10"
+harness = false
 
-# [[bin]]
-# name = "d11"
-# path = "d11/src/main.rs"
+[[bin]]
+name = "d11"
+path = "d11/src/main.rs"
 
-# [[bench]]
-# name = "d11"
-# harness = false
+[[bench]]
+name = "d11"
+harness = false
 
-# [[bin]]
-# name = "d12"
-# path = "d12/src/main.rs"
+[[bin]]
+name = "d12"
+path = "d12/src/main.rs"
 
-# [[bench]]
-# name = "d12"
-# harness = false
+[[bench]]
+name = "d12"
+harness = false
 
-# [[bin]]
-# name = "d13"
-# path = "d13/src/main.rs"
+[[bin]]
+name = "d13"
+path = "d13/src/main.rs"
 
-# [[bench]]
-# name = "d13"
-# harness = false
+[[bench]]
+name = "d13"
+harness = false
 
-# [[bin]]
-# name = "d14"
-# path = "d14/src/main.rs"
+[[bin]]
+name = "d14"
+path = "d14/src/main.rs"
 
-# [[bench]]
-# name = "d14"
-# harness = false
+[[bench]]
+name = "d14"
+harness = false
 
-# [[bin]]
-# name = "d15"
-# path = "d15/src/main.rs"
+[[bin]]
+name = "d15"
+path = "d15/src/main.rs"
 
-# [[bench]]
-# name = "d15"
-# harness = false
+[[bench]]
+name = "d15"
+harness = false
 
-# [[bin]]
-# name = "d16"
-# path = "d16/src/main.rs"
+[[bin]]
+name = "d16"
+path = "d16/src/main.rs"
 
-# [[bench]]
-# name = "d16"
-# harness = false
+[[bench]]
+name = "d16"
+harness = false
 
-# [[bin]]
-# name = "d17"
-# path = "d17/src/main.rs"
+[[bin]]
+name = "d17"
+path = "d17/src/main.rs"
 
-# [[bench]]
-# name = "d17"
-# harness = false
+[[bench]]
+name = "d17"
+harness = false
 
-# [[bin]]
-# name = "d18"
-# path = "d18/src/main.rs"
+[[bin]]
+name = "d18"
+path = "d18/src/main.rs"
 
-# [[bench]]
-# name = "d18"
-# harness = false
+[[bench]]
+name = "d18"
+harness = false
 
-# [[bin]]
-# name = "d19"
-# path = "d19/src/main.rs"
+[[bin]]
+name = "d19"
+path = "d19/src/main.rs"
 
-# [[bench]]
-# name = "d19"
-# harness = false
+[[bench]]
+name = "d19"
+harness = false
 
-# [[bin]]
-# name = "d20"
-# path = "d20/src/main.rs"
+[[bin]]
+name = "d20"
+path = "d20/src/main.rs"
 
-# [[bench]]
-# name = "d20"
-# harness = false
+[[bench]]
+name = "d20"
+harness = false
 
-# [[bin]]
-# name = "d21"
-# path = "d21/src/main.rs"
+[[bin]]
+name = "d21"
+path = "d21/src/main.rs"
 
-# [[bench]]
-# name = "d21"
-# harness = false
+[[bench]]
+name = "d21"
+harness = false
 
-# [[bin]]
-# name = "d22"
-# path = "d22/src/main.rs"
+[[bin]]
+name = "d22"
+path = "d22/src/main.rs"
 
-# [[bench]]
-# name = "d22"
-# harness = false
+[[bench]]
+name = "d22"
+harness = false
 
-# [[bin]]
-# name = "d23"
-# path = "d23/src/main.rs"
+[[bin]]
+name = "d23"
+path = "d23/src/main.rs"
 
-# [[bench]]
-# name = "d23"
-# harness = false
+[[bench]]
+name = "d23"
+harness = false
 
-# [[bin]]
-# name = "d24"
-# path = "d24/src/main.rs"
+[[bin]]
+name = "d24"
+path = "d24/src/main.rs"
 
-# [[bench]]
-# name = "d24"
-# harness = false
+[[bench]]
+name = "d24"
+harness = false
 
-# [[bin]]
-# name = "d25"
-# path = "d25/src/main.rs"
+[[bin]]
+name = "d25"
+path = "d25/src/main.rs"
 
-# [[bench]]
-# name = "d25"
-# harness = false
+[[bench]]
+name = "d25"
+harness = false
