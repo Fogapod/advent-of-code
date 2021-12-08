@@ -2,13 +2,13 @@
 // 10 for example, 200 for full
 const LINE_COUNT: usize = 200;
 
+const INPUTS_COUNT: usize = 10;
+const OUTPUTS_COUNT: usize = 4;
+
 const RAW_INPUTS_LEN: usize = 58;
 
 // skip " | "
 const OFFSET_UNTIL_OUTPUTS: usize = RAW_INPUTS_LEN + 3;
-
-// 3 newlines + 1 (2 chars) 4 times
-const MIN_OUTPUTS_LEN: usize = 3 + 2 * 4;
 
 // 1 (2 chars)
 const MIN_NUM_LEN: usize = 2;
@@ -62,46 +62,50 @@ pub fn run2(input: &[u8]) -> i64 {
         0, 0, 0, 6, 0, 0, 0, 8,
     ];
 
-    const A: i8 = 1 << 0;
-    const B: i8 = 1 << 1;
-    const C: i8 = 1 << 2;
-    const D: i8 = 1 << 3;
-    const E: i8 = 1 << 4;
-    const F: i8 = 1 << 5;
-    const G: i8 = 1 << 6;
+    const A: usize = 1 << 0;
+    const B: usize = 1 << 1;
+    const C: usize = 1 << 2;
+    const D: usize = 1 << 3;
+    const E: usize = 1 << 4;
+    const F: usize = 1 << 5;
+    const G: usize = 1 << 6;
 
-    let mut sum = 0;
+    let mut answer = 0;
 
-    // start at first outputs
-    let mut pointer = OFFSET_UNTIL_OUTPUTS + MIN_OUTPUTS_LEN + 1;
+    let mut pointer = 0;
 
     unsafe {
         for _ in 0..LINE_COUNT {
-            let mut inputs_and_outputs_len = OFFSET_UNTIL_OUTPUTS + MIN_OUTPUTS_LEN + 1;
-
-            while *input.get_unchecked(pointer) != b'\n' {
-                pointer += 1;
-                inputs_and_outputs_len += 1;
-            }
-
-            let raw_inputs = &input[pointer - inputs_and_outputs_len
-                ..pointer - inputs_and_outputs_len + RAW_INPUTS_LEN];
-
-            let raw_outputs =
-                &input[pointer - inputs_and_outputs_len + OFFSET_UNTIL_OUTPUTS..pointer];
-
             // avoid sorting by length by inserting items into array with already known offsets
             let mut inputs_offsets = [0, 0, -2, -2, -2, -2, 0, 2];
-            let mut inputs = [0i8; 10];
+            let mut inputs = [0; 10];
 
-            for raw_input in raw_inputs.split(|&byte| byte == b' ') {
-                let offset = &mut inputs_offsets[raw_input.len()];
+            for _ in 0..INPUTS_COUNT {
+                let mut num = 0;
+                let mut num_len = 0;
 
-                inputs[(*offset + raw_input.len() as i8) as usize] =
-                    raw_input.iter().map(|&byte| 1 << (byte - b'a')).sum();
+                loop {
+                    let byte = *input.get_unchecked(pointer);
 
-                *offset += 1;
+                    pointer += 1;
+
+                    if byte == b' ' {
+                        let offset = inputs_offsets.get_unchecked_mut(num_len as usize);
+
+                        *inputs.get_unchecked_mut((*offset + num_len) as usize) = num;
+
+                        *offset += 1;
+
+                        break;
+                    } else {
+                        num |= 1 << (byte - b'a');
+                        num_len += 1;
+                    }
+                }
             }
+
+            // skip "| "
+            pointer += 2;
 
             // see python solution for explanation of this part
             let one = inputs[0];
@@ -109,7 +113,7 @@ pub fn run2(input: &[u8]) -> i64 {
             let seven = inputs[1];
             let eight = inputs[9];
 
-            let mut decoding_table = [0i8; 128];
+            let mut decoding_table = [0; 128];
 
             let a = seven ^ one;
 
@@ -136,35 +140,40 @@ pub fn run2(input: &[u8]) -> i64 {
             decoding_table[(one ^ c) as usize] = F;
             decoding_table[(eight ^ (four | e | a)) as usize] = G;
 
-            let mut num: i64 = 0;
+            let mut sum = 0;
 
-            for (i, raw_output) in raw_outputs.split(|&byte| byte == b' ').rev().enumerate() {
-                let le = raw_output.len();
+            for i in (0..OUTPUTS_COUNT).rev() {
+                let mut num = 0;
+                let mut num_len = 0;
 
-                let digit = match le {
-                    2 => 1,
-                    3 => 7,
-                    4 => 4,
-                    7 => 8,
-                    _ => *SEGMENTS_TO_VALUE_MAP.get_unchecked(
-                        raw_output
-                            .iter()
-                            .map(|&byte| {
-                                *decoding_table.get_unchecked((1 << (byte - b'a')) as usize)
-                                    as usize
-                            })
-                            .sum::<usize>(),
-                    ),
-                };
+                loop {
+                    let byte = *input.get_unchecked(pointer);
 
-                num += digit * i64::pow(10, i as u32);
+                    pointer += 1;
+
+                    // both '\n' and ' '
+                    if byte <= b' ' {
+                        let digit = match num_len {
+                            2 => 1,
+                            3 => 7,
+                            4 => 4,
+                            7 => 8,
+                            _ => *SEGMENTS_TO_VALUE_MAP.get_unchecked(num as usize),
+                        };
+
+                        sum += digit * i64::pow(10, i as u32);
+
+                        break;
+                    } else {
+                        num |= *decoding_table.get_unchecked(1 << (byte - b'a'));
+                        num_len += 1;
+                    }
+                }
             }
 
-            sum += num;
-
-            pointer += MIN_OUTPUTS_LEN + OFFSET_UNTIL_OUTPUTS + 2;
+            answer += sum;
         }
     }
 
-    sum
+    answer
 }
