@@ -15,7 +15,7 @@ const MIN_NUM_LEN: usize = 2;
 // --- parser related constants --- //
 
 pub fn run1(input: &[u8]) -> i64 {
-    const VALID_LENGTHS_MAP: [i64; 10] = [0, 0, 1, 1, 1, 0, 0, 1, 0, 0];
+    const VALID_LENGTHS_MAP: [i64; 8] = [0, 0, 1, 1, 1, 0, 0, 1];
 
     let mut sum = 0;
 
