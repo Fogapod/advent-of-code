@@ -20,41 +20,33 @@ pub fn run1(input: &[u8]) -> i64 {
     let mut sum = 0;
 
     // start at first outputs
-    let mut pointer = OFFSET_UNTIL_OUTPUTS + MIN_OUTPUTS_LEN + 1;
+    let mut pointer = OFFSET_UNTIL_OUTPUTS;
 
     unsafe {
         for _ in 0..LINE_COUNT {
-            let mut outputs_len = MIN_OUTPUTS_LEN + 1;
+            pointer += MIN_NUM_LEN;
 
-            while *input.get_unchecked(pointer) != b'\n' {
-                pointer += 1;
-                outputs_len += 1;
-            }
-
-            let outputs = &input[pointer - outputs_len..pointer];
-
-            let mut num_pointer = MIN_NUM_LEN;
             let mut num_len = MIN_NUM_LEN;
 
             loop {
-                if num_pointer == outputs_len {
+                let byte = *input.get_unchecked(pointer);
+
+                if byte == b'\n' {
                     sum += VALID_LENGTHS_MAP.get_unchecked(num_len);
 
                     break;
-                }
-
-                if outputs[num_pointer] == b' ' {
+                } else if byte == b' ' {
                     sum += VALID_LENGTHS_MAP.get_unchecked(num_len);
 
                     num_len = MIN_NUM_LEN;
-                    num_pointer += 1 + MIN_NUM_LEN;
+                    pointer += 1 + MIN_NUM_LEN;
                 } else {
-                    num_pointer += 1;
+                    pointer += 1;
                     num_len += 1;
                 }
             }
 
-            pointer += MIN_OUTPUTS_LEN + OFFSET_UNTIL_OUTPUTS + 2;
+            pointer += OFFSET_UNTIL_OUTPUTS + 1;
         }
     }
 
