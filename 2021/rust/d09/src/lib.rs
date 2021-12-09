@@ -11,9 +11,7 @@ pub fn run1(input: &[u8]) -> i64 {
 
     unsafe {
         for y in 1..GRID_HEIGHT + 1 {
-            let offset = y
-                .unchecked_sub(1)
-                .unchecked_mul(GRID_WIDTH.unchecked_add(1));
+            let offset = y.unchecked_sub(1).unchecked_mul(GRID_WIDTH + 1);
 
             grid.get_unchecked_mut(y)
                 .get_unchecked_mut(1..GRID_WIDTH + 1)
@@ -56,6 +54,7 @@ pub fn run1(input: &[u8]) -> i64 {
     answer
 }
 
+#[inline(always)]
 unsafe fn flood(grid: &mut [[u8; GRID_WIDTH + 2]; GRID_HEIGHT + 2], x: usize, y: usize) -> i64 {
     let point = grid.get_unchecked_mut(y).get_unchecked_mut(x);
 
@@ -65,10 +64,70 @@ unsafe fn flood(grid: &mut [[u8; GRID_WIDTH + 2]; GRID_HEIGHT + 2], x: usize, y:
 
     *point = b'9';
 
-    1 + flood(grid, x - 1, y)
-        + flood(grid, x, y - 1)
-        + flood(grid, x + 1, y)
-        + flood(grid, x, y + 1)
+    1 + flood_up(grid, x, y - 1)
+        + flood_down(grid, x, y + 1)
+        + flood_left(grid, x - 1, y)
+        + flood_right(grid, x + 1, y)
+}
+
+unsafe fn flood_up(grid: &mut [[u8; GRID_WIDTH + 2]; GRID_HEIGHT + 2], x: usize, y: usize) -> i64 {
+    let point = grid.get_unchecked_mut(y).get_unchecked_mut(x);
+
+    if *point == b'9' {
+        return 0;
+    }
+
+    *point = b'9';
+
+    1 + flood_up(grid, x, y - 1) + flood_left(grid, x - 1, y) + flood_right(grid, x + 1, y)
+}
+
+unsafe fn flood_down(
+    grid: &mut [[u8; GRID_WIDTH + 2]; GRID_HEIGHT + 2],
+    x: usize,
+    y: usize,
+) -> i64 {
+    let point = grid.get_unchecked_mut(y).get_unchecked_mut(x);
+
+    if *point == b'9' {
+        return 0;
+    }
+
+    *point = b'9';
+
+    1 + flood_down(grid, x, y + 1) + flood_left(grid, x - 1, y) + flood_right(grid, x + 1, y)
+}
+
+unsafe fn flood_left(
+    grid: &mut [[u8; GRID_WIDTH + 2]; GRID_HEIGHT + 2],
+    x: usize,
+    y: usize,
+) -> i64 {
+    let point = grid.get_unchecked_mut(y).get_unchecked_mut(x);
+
+    if *point == b'9' {
+        return 0;
+    }
+
+    *point = b'9';
+
+    1 + flood_up(grid, x, y - 1) + flood_down(grid, x, y + 1) + flood_left(grid, x - 1, y)
+}
+
+unsafe fn flood_right(
+    grid: &mut [[u8; GRID_WIDTH + 2]; GRID_HEIGHT + 2],
+    x: usize,
+    y: usize,
+) -> i64 {
+    let point = grid.get_unchecked_mut(y).get_unchecked_mut(x);
+
+    if *point == b'9' {
+        return 0;
+    }
+
+    *point = b'9';
+
+    1 + flood_up(grid, x, y - 1) + flood_down(grid, x, y + 1) + flood_right(grid, x + 1, y)
 }
 
 pub fn run2(input: &[u8]) -> i64 {
@@ -78,9 +137,7 @@ pub fn run2(input: &[u8]) -> i64 {
 
     unsafe {
         for y in 1..GRID_HEIGHT + 1 {
-            let offset = y
-                .unchecked_sub(1)
-                .unchecked_mul(GRID_WIDTH.unchecked_add(1));
+            let offset = y.unchecked_sub(1).unchecked_mul(GRID_WIDTH + 1);
 
             grid.get_unchecked_mut(y)
                 .get_unchecked_mut(1..GRID_WIDTH + 1)
@@ -91,6 +148,7 @@ pub fn run2(input: &[u8]) -> i64 {
             for x in 1..GRID_WIDTH + 1 {
                 let point = *grid.get_unchecked(y).get_unchecked(x);
 
+                // there will be a lot of nines because of floods
                 if point == b'9' {
                     continue;
                 }
