@@ -145,24 +145,17 @@ pub fn run2(input: &[u8]) -> i64 {
         }
 
         for y in 1..GRID_HEIGHT + 1 {
-            for x in 1..GRID_WIDTH + 1 {
-                let point = *grid.get_unchecked(y).get_unchecked(x);
+            let mut x = 1;
+
+            loop {
+                if x > GRID_WIDTH {
+                    break;
+                }
 
                 // there will be a lot of nines because of floods
-                if point == b'9' {
-                    continue;
-                }
+                if *grid.get_unchecked(y).get_unchecked(x) == b'9' {
+                    x += 1;
 
-                if *grid.get_unchecked(y.unchecked_sub(1)).get_unchecked(x) <= point {
-                    continue;
-                }
-                if *grid.get_unchecked(y).get_unchecked(x.unchecked_sub(1)) <= point {
-                    continue;
-                }
-                if *grid.get_unchecked(y.unchecked_add(1)).get_unchecked(x) <= point {
-                    continue;
-                }
-                if *grid.get_unchecked(y).get_unchecked(x.unchecked_add(1)) <= point {
                     continue;
                 }
 
@@ -179,7 +172,10 @@ pub fn run2(input: &[u8]) -> i64 {
                     three_largest_floods[2] = flooded;
                 }
 
-                // no perfomance difference
+                // skip current non wall AND wall (possibly)
+                x += 2;
+
+                // no perfomance difference, but this one is ugly
                 //
                 // if flooded >= *three_largest_floods.get_unchecked(0) {
                 //     *three_largest_floods.get_unchecked_mut(2) =
