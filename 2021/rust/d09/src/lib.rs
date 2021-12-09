@@ -54,22 +54,6 @@ pub fn run1(input: &[u8]) -> i64 {
     answer
 }
 
-#[inline(always)]
-unsafe fn flood(grid: &mut [[u8; GRID_WIDTH + 2]; GRID_HEIGHT + 2], x: usize, y: usize) -> i64 {
-    let point = grid.get_unchecked_mut(y).get_unchecked_mut(x);
-
-    if *point == b'9' {
-        return 0;
-    }
-
-    *point = b'9';
-
-    1 + flood_up(grid, x, y - 1)
-        + flood_down(grid, x, y + 1)
-        + flood_left(grid, x - 1, y)
-        + flood_right(grid, x + 1, y)
-}
-
 unsafe fn flood_up(grid: &mut [[u8; GRID_WIDTH + 2]; GRID_HEIGHT + 2], x: usize, y: usize) -> i64 {
     let point = grid.get_unchecked_mut(y).get_unchecked_mut(x);
 
@@ -148,18 +132,23 @@ pub fn run2(input: &[u8]) -> i64 {
             let mut x = 1;
 
             loop {
-                if x > GRID_WIDTH {
+                if x >= GRID_WIDTH {
                     break;
                 }
 
+                let point = grid.get_unchecked_mut(y).get_unchecked_mut(x);
+
                 // there will be a lot of nines because of floods
-                if *grid.get_unchecked(y).get_unchecked(x) == b'9' {
+                if *point == b'9' {
                     x += 1;
 
                     continue;
                 }
 
-                let flooded = flood(&mut grid, x, y);
+                *point = b'9';
+
+                // there are walls on top and left
+                let flooded = 1 + flood_down(&mut grid, x, y + 1) + flood_right(&mut grid, x + 1, y);
 
                 if flooded >= three_largest_floods[0] {
                     three_largest_floods[2] = three_largest_floods[1];
@@ -171,9 +160,6 @@ pub fn run2(input: &[u8]) -> i64 {
                 } else if flooded >= three_largest_floods[2] {
                     three_largest_floods[2] = flooded;
                 }
-
-                // skip current non wall AND wall (possibly)
-                x += 2;
 
                 // no perfomance difference, but this one is ugly
                 //
@@ -190,6 +176,9 @@ pub fn run2(input: &[u8]) -> i64 {
                 // } else if flooded >= *three_largest_floods.get_unchecked(2) {
                 //     *three_largest_floods.get_unchecked_mut(2) = flooded;
                 // }
+
+                // tile on the right is either a wall or became a wall after flood
+                x += 2;
             }
         }
     }
