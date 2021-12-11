@@ -5,6 +5,7 @@ edition = "2021"
 
 [workspace]
 members = [
+    "d01",
     "d02",
     "d04",
     "d05",
@@ -31,6 +32,7 @@ members = [
 ]
 
 [dependencies]
+d01 = { path = "d01" }
 d02 = { path = "d02" }
 d04 = { path = "d04" }
 d05 = { path = "d05" }
@@ -57,6 +59,14 @@ d25 = { path = "d25" }
 
 [dev-dependencies]
 criterion = "*"
+
+[[bin]]
+name = "d01"
+path = "d01/src/main.rs"
+
+[[bench]]
+name = "d01"
+harness = false
 
 [[bin]]
 name = "d02"
