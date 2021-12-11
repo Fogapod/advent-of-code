@@ -42,7 +42,6 @@ for line in lines:
             break
 
 
-# x < 167382
 print("part 1:", answer)
 
 # part 2
