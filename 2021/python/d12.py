@@ -30,9 +30,7 @@ for (start, end) in data:
 
 
 # part 1
-def check_all_paths(path: str, point: str, visited) -> int:
-    path += f",{point}"
-
+def check_all_paths(point: str, visited) -> int:
     if point == "end":
         return 1
 
@@ -48,7 +46,7 @@ def check_all_paths(path: str, point: str, visited) -> int:
     result = 0
 
     for next_point in connections[point]:
-        result += check_all_paths(path, next_point, new_visited)
+        result += check_all_paths(next_point, new_visited)
 
     return result
 
@@ -56,23 +54,14 @@ def check_all_paths(path: str, point: str, visited) -> int:
 paths = 0
 
 for start in starting_points:
-    paths += check_all_paths("start", start, [])
+    paths += check_all_paths(start, [])
 
 
 print("part 1:", paths)
 
-#     start
-#     /   \
-# c--A-----b--d
-#     \   /
-#      end
 
 # part 2
-def check_all_paths(
-    path: str, point: str, visited, second_visit_happenned: bool
-) -> int:
-    path += f",{point}"
-
+def check_all_paths(point: str, visited, second_visit_happenned: bool) -> int:
     if point == "end":
         return 1
 
@@ -91,7 +80,7 @@ def check_all_paths(
     result = 0
 
     for next_point in connections[point]:
-        result += check_all_paths(path, next_point, new_visited, second_visit_happenned)
+        result += check_all_paths(next_point, new_visited, second_visit_happenned)
 
     return result
 
@@ -99,7 +88,7 @@ def check_all_paths(
 paths = 0
 
 for start in starting_points:
-    paths += check_all_paths("start", start, [], False)
+    paths += check_all_paths(start, [], False)
 
 
 print("part 2:", paths)
